@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3 
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: docker build -t ghcr.io/colashn65/december/node-app:1.0 .
+      - run: docker push ghcr.io/colashn65/december/node-app:1.0
+      - run: ssh -o "StrictHostKeyChecking no" 'colashn65-december-hws30ushm1l#_Fy852hBobA_iQcAjDDOc31I1.CIJ42X@colashn65-december-hws30ushm1l.ssh.ws-eu107.gitpod.io' "cd /workspace/december/node-app && docker compose pull && docker compose up -d";
+      - name: send default messgae
+        if: success()
+        uses: appleboy/telegram-action@master
+        with:
+          message: "Сделано успешно"
+          to: 1680135436
+          token: 6858811804:AAEg1CXKjqsilxqyd3-Eq6GAk7UkedYkblU
+      - name: send default message
+        if: failure()
+        uses: appleboy/telegram-action@master
+        with:
+          message: "Сделано no успешно"
+          to: 1680135436
+          token: 6858811804:AAEg1CXKjqsilxqyd3-Eq6GAk7UkedYkblU
+        
