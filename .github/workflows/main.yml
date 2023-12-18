@@ -18,7 +18,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: docker build -t ghcr.io/colashn65/december .
       - run: docker push ghcr.io/colashn65/december
-      - run: ssh -o "StrictHostKeyChecking no" 'colashn65-december-bc1a01q4pqc#zNe.DoS-kai3VxE9B0jTDcc03xvvZaAl@colashn65-december-bc1a01q4pqc.ssh.ws-eu107.gitpod.io' "cd /workspace/December && docker compose pull && docker compose up -d" authconfig --disablewinbind --disablewinbindauth --update;
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: send default messgae
         if: success()
         uses: appleboy/telegram-action@master
@@ -30,7 +33,7 @@ jobs:
         if: failure()
         uses: appleboy/telegram-action@master
         with:
-          message: "Сделано no успешно"
+          message: "Сделано неуспешно"
           to: 1680135436
           token: 6858811804:AAEg1CXKjqsilxqyd3-Eq6GAk7UkedYkblU
         
