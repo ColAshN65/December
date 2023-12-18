@@ -16,9 +16,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker build -t ghcr.io/colashn65/december/node-app:1.0 .
-      - run: docker push ghcr.io/colashn65/december/node-app:1.0
-      - run: ssh -o "StrictHostKeyChecking no" 'colashn65-december-bc1a01q4pqc#zNe.DoS-kai3VxE9B0jTDcc03xvvZaAl@colashn65-december-bc1a01q4pqc.ssh.ws-eu107.gitpod.io' "cd /workspace/december/node-app && docker compose pull && docker compose up -d";
+      - run: docker build -t ghcr.io/colashn65/december:1.0 .
+      - run: docker push ghcr.io/colashn65/december:1.0
+      - run: ssh -o "StrictHostKeyChecking no" 'colashn65-december-bc1a01q4pqc#zNe.DoS-kai3VxE9B0jTDcc03xvvZaAl@colashn65-december-bc1a01q4pqc.ssh.ws-eu107.gitpod.io' "cd /workspace/december && docker compose pull && docker compose up -d";
       - name: send default messgae
         if: success()
         uses: appleboy/telegram-action@master
