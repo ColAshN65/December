@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: docker build -t ghcr.io/colashn65/december .
       - run: docker push ghcr.io/colashn65/december
-      - run: ssh -o "StrictHostKeyChecking no" 'colashn65-december-bc1a01q4pqc#zNe.DoS-kai3VxE9B0jTDcc03xvvZaAl@colashn65-december-bc1a01q4pqc.ssh.ws-eu107.gitpod.io' "cd /workspace/december && docker compose pull && docker compose up -d";
+      - run: ssh -o "StrictHostKeyChecking no" 'colashn65-december-bc1a01q4pqc#zNe.DoS-kai3VxE9B0jTDcc03xvvZaAl@colashn65-december-bc1a01q4pqc.ssh.ws-eu107.gitpod.io' "cd /workspace/December && docker compose pull && docker compose up -d";
       - name: send default messgae
         if: success()
         uses: appleboy/telegram-action@master
