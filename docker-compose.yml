@@ -6,7 +6,7 @@ services:
     restart: always
     permissions:
   node:
-    image: ghcr.io/colashn65/december/node-app
+    image: ghcr.io/colashn65/december
     restart: always
     permissions: 
     ports:
