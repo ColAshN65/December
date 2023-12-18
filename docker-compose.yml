@@ -5,13 +5,9 @@ services:
     image: ghcr.io/colashn65/december/python-app
     restart: always
     permissions:
-      contents: read
-      packages: write
   node:
     image: ghcr.io/colashn65/december/node-app
     restart: always
-    permissions:
-      contents: read
-      packages: write
+    permissions: 
     ports:
-      - 8080:8080
+      - 3030:3030
