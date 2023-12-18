@@ -18,6 +18,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: docker build -t ghcr.io/colashn65/december .
       - run: docker push ghcr.io/colashn65/december
+      - run: npm init
+      - run: npm install
+      - run: git add index.js package.json package-lock.json
+      - run: git commit -m "initialize npm package"
+      - run: git push origin main
       - run: npm ci
       - run: npm publish
         env:
